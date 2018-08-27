@@ -1,0 +1,52 @@
+﻿@using MyBookstore.Models;
+@model MyBookstore.Models.HomePageViewModel ;
+
+
+@{
+    //ViewData["Title"] = "Home";
+    Layout = "~/Views/Layout.cshtml";
+}
+
+
+
+<a href="/Authors/AddAuthor" class="btn btn-lg btn-primary">Add new author</a>
+
+<h1>Our Authors</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a href="@Url.Action("GetAllAuthorsPage", "Authors", new { sortOrder = ViewBag.SurnameSort })">
+                  
+                    SURNAME
+                </a>
+            </th>
+            <th>
+
+              
+                NAME
+
+            </th>
+            <th>
+                MIDDLENAME
+            </th>
+            <th>INFO</th>
+
+
+
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (AuthorViewModel a in @Model.Authors)
+        {
+            <tr>
+                <td><p>@a.Surname</p></td>
+                <td><p>@a.Name</p></td>
+                <td><p>@a.MiddleName</p></td>
+                <td><p>@Html.ActionLink("Open", "ShowAuthor", new { id = a.AuthorId })</p></td>
+            </tr>
+        }
+    </tbody>
+</table>

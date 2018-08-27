@@ -1,0 +1,87 @@
+﻿@using MyBookstore.Models;
+@model MyBookstore.Models.ShoppingCartModel;
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "Form Name" }))
+{
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <td><p> #</p></td>
+                <td><p>Book</p></td>
+                <td><p> Author</p></td>
+                <td><p> Price</p></td>
+                <td><p> Quantity</p></td>
+                <td><p>Item Total</p></td>
+                <td><p>More...</p></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var b in @Model.ShoppingCartItems)
+            {
+                <tr>
+                    <td><p>@b.Book.UploadedPicture</p></td>
+                    <td><p>@b.Book.Name</p></td>
+                    <td><p>@b.Book.Author.Surname</p></td>
+                    <td><p>@b.Book.Price</p></td>
+                    <td><p><input type="number" name="quantity" value="@b.Qty" min="0" max="99"> <input type="submit" value="Calculate" /></p></td>
+                    <td><p>!!!</p></td>
+                    <td><p>@Html.ActionLink("Open", "ShowBook", "Books", new { id = b.Book.BookId })</p></td>
+                    <td>
+                        <p>
+                            <a href="/ShoppingCart/RemoveFromCart/@b.Id">
+                                <img src="~/Images/Uploads/delete3-256.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                            </a>
+
+                            @Html.ActionLink("Delete", "RemoveFromCart",  new { id = @b.Id } ,
+                            new { onclick = "return confirm ('Are you sure you want to delete this item?');" })
+
+                        </p>
+                    </td>
+                </tr>
+            }
+            <tr></tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td><p> </p></td>
+                <td><p> </p></td>
+                <td>Total Price</td>
+                <td>Price</td>
+                <td></td>
+                <td>
+                    <p>
+                        <a href="/ShoppingCart/RemoveAllFromCart">
+                            <img src="~/Images/Uploads/remove-button.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                            @Html.ActionLink("Delete All", "RemoveAllFromCart",
+                           new { onclick = "return confirm ('Are you sure you want to delete all items?');" })
+                        </a>
+                    </p>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <hr>
+    <p>
+        Final Price
+    </p>
+    <p>
+        <a href="/#">
+            <img src="~/Images/Uploads/buy-now-button-transparent-png-5.png" width="110" height="40" class="d-inline-block align-top" align="right" alt="">
+
+        </a>
+        <hr>
+    </p>
+    
+
+
+
+
+}
+

@@ -1,0 +1,18 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/MyBookstore/v15/Server/sqlite3
+/Libraries/MyBookstore.Core/bin/Debug/netcoreapp2.0
+/Libraries/MyBookstore.Core/obj/Debug/netcoreapp2.0
+/Libraries/MyBookstore.Core/obj
+/Libraries/MyBookstore.Data/bin/Debug/netcoreapp2.0
+/Libraries/MyBookstore.Data/obj/Debug/netcoreapp2.0
+/Libraries/MyBookstore.Data/obj
+/Libraries/MyBookstore.Models/bin/Debug/netcoreapp2.0
+/Libraries/MyBookstore.Models/bin/Release/netcoreapp2.0
+/Libraries/MyBookstore.Models/obj
+/Libraries/MyBookstore.Services/bin/Debug/netcoreapp2.0
+/Libraries/MyBookstore.Services/obj
+/Presentation/MyBookstore.Web/bin/Debug/netcoreapp2.0
+/Presentation/MyBookstore.Web/obj

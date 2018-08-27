@@ -1,0 +1,71 @@
+﻿@using MyBookstore.Models;
+@model MyBookstore.Models.HomePageViewModel ;
+@{
+    Layout = "~/Views/Admin/Layout.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Admin", FormMethod.Post, new { id = "Form Name" }))
+{
+    <br>
+    <div>
+
+        <a href="/Authors/EditAuthor" class="btn btn-dark">Add new author</a>
+        <a href="/Books/EditBook/new" class="btn btn-dark">Add New Book</a>
+    </div>
+    <br>
+    <div class="alert alert-dark" role="alert" it>
+        <a href="#" class="alert-link">NEWS and NEW ARRIVALS</a>
+    </div>
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <td><p> Title</p></td>
+                <td><p> Author</p></td>
+                <td><p> Description</p></td>
+                <td><p>More...</p></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var b in @Model.Books)
+            {
+                <tr>
+                    <td><p>@b.Name</p></td>
+                    <td><p>@b.Author.Surname</p></td>
+                    <td><p>@b.Description</p></td>
+                    <td><p>@Html.ActionLink("Open", "ShowBook", "Books", new { id = b.BookId })</p></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    @if (Model.HasPreviousPage)
+    {
+        <a href="@Url.Action("Index", "Home", new { PageNumber = Model.PageNumber - 1 })"
+           class="btn btn-lg btn-default">
+            <<
+        </a>
+    }
+    @Model.PageNumber
+
+    @if (Model.HasNextPage)
+    {
+
+        <a href="@Url.Action("Index", "Home",new {PageNumber = Model.PageNumber + 1 } )"
+           class="btn btn-lg btn-default">
+            >>
+        </a>
+    }
+
+
+
+
+
+
+
+
+}
+

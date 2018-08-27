@@ -1,0 +1,53 @@
+﻿@using MyBookstore.Models;
+@model MyBookstore.Models.HomePageViewModel;
+
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="no-referrer" />
+    <title>MyBookstore</title>
+    <link rel="stylesheet" href="/style/bootstrap.css">
+</head>
+<body>
+
+    <h2>Edit</h2>
+    
+    <div>
+        <h3>Our Authors</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td><p> Surname</p></td>
+                    <td><p> Name</p></td>
+                    <td><p> Middlename</p></td>
+                    <td><p>More...</p></td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (AuthorViewModel a in @Model.Authors)
+            {
+                <tr>
+                    <td><p>@a.Surname</p></td>
+                    <td><p>@a.Name</p></td>
+                    <td><p>@a.MiddleName</p></td>
+                    <td><p><a href="/Home/Author/@a.AuthorId">More info & reviews</a></p></td>
+                </tr>
+        }
+            </tbody>
+        </table>
+        </div>
+
+            <a href="/home/edit" class="btn btn-lg btn-primary">Add new author</a>
+
+</body>
+</html>
+
+

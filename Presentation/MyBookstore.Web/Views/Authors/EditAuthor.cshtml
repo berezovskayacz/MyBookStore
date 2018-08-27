@@ -1,0 +1,54 @@
+﻿@using MyBookstore.Models;
+@model MyBookstore.Models.AuthorViewModel;
+
+@{
+    ViewBag.Title = "Edit Author";
+}
+
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<form method="post">
+    <br />
+    <table>
+
+        <tr>
+            <td> @Html.HiddenFor(m => m.AuthorId) </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.Name, "Name")</td>
+            <td>@Html.EditorFor(a => a.Name) </td>
+
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.MiddleName, "Middle Name")</td>
+            <td>@Html.EditorFor(a => a.MiddleName) </td>
+        </tr>
+
+        <tr>
+            <td>@Html.LabelFor(a => a.Surname, "Surname")</td>
+            <td>@Html.EditorFor(a => a.Surname) </td>
+        </tr>
+
+
+        <tr>
+            <td>@Html.LabelFor(a => a.BirthYear, "Birth Year")</td>
+            <td>@Html.EditorFor(a => a.BirthYear) </td>
+        </tr>
+        <tr>
+            <td>@Html.LabelFor(a => a.DeathYear, "Death Year")</td>
+            <td>@Html.EditorFor(a => a.DeathYear) </td>
+        </tr>
+
+        <tr>
+            <td>@Html.LabelFor(a => a.Description, "Description")</td>
+            <td>@Html.EditorFor(a => a.Description) </td>
+        </tr>
+
+
+
+        <tr><td><input type="submit" value="Submit" /> </td><td></td></tr>
+    </table>
+</form>

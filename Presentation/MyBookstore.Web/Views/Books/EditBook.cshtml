@@ -1,0 +1,55 @@
+﻿@using MyBookstore.Models;
+@model MyBookstore.Models.BookViewModel;
+
+
+@{
+    ViewBag.Title = "Edit Book";
+}
+
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<form method="post" enctype="multipart/form-data">
+
+    <br>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>@Html.EditorFor(a => a.Name) </td>
+        </tr>
+        <tr>
+            <td>Author</td>
+            <td>
+                @Html.DropDownList("AuthorId", (IEnumerable<SelectListItem>)Model.Authors)
+            </td>
+        </tr>
+
+        <tr>
+            <td>Price</td>
+            <td>@Html.EditorFor(a => a.Price) </td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td>@Html.EditorFor(a => a.Description) </td>
+        </tr>
+
+        <tr>
+            <td>Picture</td>
+            <td>
+                <input type="file" name="UploadedPicture" />
+
+            </td>
+            <td>
+                <input asp-for="@Model.ImageIsMain" id="IsMain" name="ImageIsMain" type="checkbox" value="true"> <label for="IsMain">Is Thumbnail?</label>
+                <input name="bookId" type="hidden" value="@Model.BookId">
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Submit" /> </td>
+            <td></td>
+        </tr>
+    </table>
+
+</form>
+

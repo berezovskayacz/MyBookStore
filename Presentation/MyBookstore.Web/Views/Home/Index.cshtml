@@ -1,0 +1,285 @@
+﻿@using MyBookstore.Models;
+@model MyBookstore.Models.HomePageViewModel ;
+@{
+    Layout = "~/Views/Layout.cshtml";
+}
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { id = "Form Name" }))
+{
+    <br>
+    <div>
+
+        <a href="/Authors/EditAuthor" class="btn btn-dark">Add new author</a>
+        <a href="/Books/EditBook/new" class="btn btn-dark">Add New Book</a>
+    </div>
+    <br>
+    <div class="alert alert-dark" role="alert" it>
+        <a href="#" class="alert-link">NEWS and NEW ARRIVALS</a>
+    </div>
+
+    <div class="container">
+        <div class="row">
+
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style=" width:100%;">
+                <div style="margin-bottom:20px;">
+                    <div style="float:left;">
+                        <a class="" href="#carouselControls" role="button" data-slide="prev">
+                            <span>Previous</span>
+                        </a>
+                    </div>
+                    <div style="float:right;">
+                        <a class="" href="#carouselControls" role="button" data-slide="next">
+                            <span>Next</span>
+                        </a>
+                    </div>
+                    <div style="clear:both;">
+                        </div>
+                </div>
+
+                <div class="carousel-inner" style="height: 550px !important;">
+
+                    @{var carouselSize = 4;}
+
+                    <div class="container">
+                        <div class="row">
+                            <div id="carouselControls" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    @for (int p = 0; p < Model.CarouselBooks.Count % carouselSize; p++)
+                                    {
+                                        <div class="@(p==0 ? "carousel-item active" : "carousel-item")">
+                                            <div class="row">
+
+                                                @foreach (var book in Model.CarouselBooks.Skip(p * carouselSize).Take(carouselSize))
+                                                {
+                                                    <div class="col-sm-3">
+                                                        <div class="col-item">
+
+                                                            <div class="photo">
+                                                                <img src="@Html.Raw(String.IsNullOrEmpty(book.ThumbnailName) ? "/Images/Uploads/Default.jpg" : "/Images/Uploads/" + book.ThumbnailName)" style="width:260px; height:300px;" class="img-responsive" alt="a" />
+                                                            </div>
+
+
+                                                            <div class="info">
+                                                                <div class="row">
+                                                                    <div class="price col-md-12">
+                                                                        <h5>
+                                                                            @book.Name
+
+                                                                        </h5>
+
+                                                                        <h5 class="price-text-color">
+                                                                            @book.Price
+                                                                        </h5>
+
+                                                                        <h5 class="price-text-color">
+                                                                            @Html.ActionLink("More details", "ShowBook", "Books", new { id = book.BookId })
+                                                                        </h5>
+
+                                                                        <h5 class="price-text-color">
+                                                                            @Html.ActionLink("Add to Cart", "AddToCart", "ShoppingCart", new { id = book.BookId })
+                                                                        </h5>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                }
+
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    @*<div class="container">
+        <div class="row">
+            <div class="row">
+                <div class="col-md-12">*@
+    <h4>
+        Readers' Club Choice
+    </h4>
+    @*</div>*@
+    <div class="col-md-10">
+        <!-- Controls -->
+        <div class="controls pull-right hidden-xs">
+            <a class="left fa fa-chevron-left btn btn-success" href="#carousel-example"
+               data-slide="prev"></a>
+
+            <a class="right fa fa-chevron-right btn btn-success" href="#carousel-example"
+               data-slide="next"></a>
+        </div>
+    </div>
+
+    <div id="carousel-example" class="carousel slide hidden-xs" data-ride="carousel">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            @for (int r = 0; r < (Model.CarouselBooks.Count % 4); r++)
+            {
+                <div class="@Html.Raw(r == 0 ?"item active":"item")">
+                    <div class="row">
+
+                        @foreach (var book in Model.CarouselBooks.Skip(r * 4).Take(4))
+                        {
+                            <div class="col-sm-3">
+                                <div class="col-item">
+                                    <div class="photo">
+                                        <img src="@Html.Raw(String.IsNullOrEmpty(book.ThumbnailName) ?  "/Images/Uploads/Default.jpg"  : "/Images/Uploads/"+book.ThumbnailName)" style="width:200px; height:300px;" alt="a" />
+                                    </div>
+                                    <div class="info">
+                                        <div class="row">
+                                            <div class="price col-md-6">
+                                                <h5>
+                                                    @book.Name
+
+                                                </h5>
+
+                                                <h5 class="price-text-color">
+                                                    @book.Price
+                                                </h5>
+                                            </div>
+                                            <div class="rating hidden-sm col-md-6">
+                                                <i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="price-text-color fa fa-star"></i><i class="price-text-color fa fa-star">
+                                                </i><i class="fa fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="separator clear-left">
+                                            <p class="btn-add">
+                                                <i class="fa fa-shopping-cart"></i><a href="http://www.jquery2dotnet.com" class="hidden-sm">Add to cart</a>
+                                            </p>
+                                            <p class="btn-details">
+                                                <i class="fa fa-list"></i>
+
+                                            <p>
+                                                @Html.ActionLink("More details", "ShowBook", "Books", new { id = book.BookId })
+
+                                            </p>
+                                        </div>
+                                        <div class="clearfix">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    @*</div>
+        </div>*@
+
+
+
+
+
+
+
+
+    <h1>Our Books</h1>
+
+    <form method="get">
+        <div class="form-inline form-group">
+            <label class="control-label">Book: </label>
+            <input type="text" name="BookNameSearchParameter" value="@ViewData["currentFilter"]" />
+            @*@Html.TextBox("BookNameSearchParameter", Model.BookNameSearchParameter, htmlAttributes: new { @class = "form-control" })*@
+
+            <label class="control-label">Author: </label>
+            @Html.DropDownList("AuthorIdSearchParameter", Model.Authors.Select(t => new SelectListItem()
+            {
+                Text = t.Name + " " + t.Surname,
+                Value = t.AuthorId.ToString()
+            }), "Any",
+
+
+                                                                                                                                                                                                                       htmlAttributes: new { @class = "form-control" })
+
+            <input type="submit" value="Filter" class="btn btn-default" />
+        </div>
+    </form>
+
+
+
+
+
+
+
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <td><p> Title</p></td>
+                <td><p> Author</p></td>
+                <td><p> Description</p></td>
+                <td><p>More...</p></td>
+                <td></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var b in @Model.Books)
+            {
+                <tr>
+                    <td><p>@b.Name</p></td>
+                    <td><p>@b.Author.Surname</p></td>
+                    <td><p>@b.Description</p></td>
+                    <td><p>@Html.ActionLink("Open", "ShowBook", "Books", new { id = b.BookId })</p></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    @if (Model.HasPreviousPage)
+    {
+        <a href="@Url.Action("Index", "Home", new { PageNumber = Model.PageNumber - 1 })"
+           class="btn btn-lg btn-default">
+            <<
+        </a>
+    }
+    @Model.PageNumber
+
+    @if (Model.HasNextPage)
+    {
+
+        <a href="@Url.Action("Index", "Home",new {PageNumber = Model.PageNumber + 1 } )"
+           class="btn btn-lg btn-default">
+            >>
+        </a>
+    }
+
+
+
+
+
+
+
+
+}
+

@@ -1,0 +1,126 @@
+﻿@using MyBookstore.Models;
+@model MyBookstore.Models.BookViewModel;
+
+
+@{
+    //ViewData["Title"] = "Home";
+    Layout = "~/Views/Layout.cshtml";
+}
+
+<link href="~/fancybox-master/dist/jquery.fancybox.min.css" rel="stylesheet">
+<script src="~/fancybox-master/dist/jquery.fancybox.min.js"></script>
+
+
+<div>
+    <h2>Book Information</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author.Surname)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaperBook)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaperBook)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reviews)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reviews)
+        </dd>
+        <dd>
+            @if (Model.ThumbnailName != null)
+            {
+                <img style='width:150px; height:200px;' src="~/Images/Uploads/@Model.ThumbnailName" class="rounded left" onclick="" /> @*@(Convert.ToBase64String(Model.Picture))" />*@
+            }
+        </dd>
+
+
+        <dd>
+            <section class="gallery-block cards-gallery">
+                <div class="container">
+
+                    <div class="heading">
+                        <h4>Book Images</h4>
+                    </div>
+                    <div class="row">
+
+                        @if (Model.ThumbnailName != null)
+                        {
+                            var imagePath = "";
+                            foreach (var p in Model.Pictures.Where(n => n.BookId == Model.BookId && n.Main != true))
+                            {
+
+                                imagePath = @"/Images/Uploads/" + p.Id + "_" + p.Name.ToString();
+                                <div class="col-md-6 col-lg-2">
+                                    <div class="card border-0 transform-on-hover">
+                                        <a data-fancybox="gallery" href="@imagePath">
+                                            <img src="@imagePath" style='width:150px; height:200px;' alt="Card Image" class="rounded mx-auto d-block img-fluid">
+                                        </a>
+                                        <div class="card-body">
+                                            <h6><a href="#">@Model.Name</a></h6>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            }
+                        }
+
+
+                    </div>
+                </div>
+
+            </section>
+
+
+
+
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index", "Home") |
+    @Html.ActionLink("Edit", "EditBook", new { id = Model.BookId }) |
+
+    @Html.ActionLink("Delete", "DeleteBook",  new { id = Model.BookId } ,
+    new { onclick = "return confirm ('Are you sure you want to delete this item?');" })
+
+</p>

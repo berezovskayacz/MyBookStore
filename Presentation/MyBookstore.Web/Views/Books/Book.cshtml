@@ -1,0 +1,55 @@
+﻿using MyBookstore.Models;
+@model MyBookstore.Models.BookViewModel;
+
+
+<div>
+    <h4>Book Information</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Author.MiddleName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Author.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Genre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaperBook)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BookFormats)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsAvailable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reviews)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index") |
+
+</p>
